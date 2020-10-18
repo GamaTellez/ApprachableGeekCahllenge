@@ -6,3 +6,19 @@
 //
 
 import Foundation
+import UIKit
+
+class ProfileNavController : UINavigationController {
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        self.setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUp() {
+        self.navigationBar.barTintColor = UIColor.blue
+    }
+}

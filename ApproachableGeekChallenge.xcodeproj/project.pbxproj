@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		871EC8B525364BA3005CC42C /* ImageProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871EC8B425364BA3005CC42C /* ImageProfile.swift */; };
 		871EC8C32538F89B005CC42C /* ProfileVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */; };
+		8735A1C6253DFA20003501AF /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8735A1C5253DFA20003501AF /* InfoTableViewCell.swift */; };
+		87B65795253DF868006D6770 /* InfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B65794253DF868006D6770 /* InfoTableView.swift */; };
 		87D21E5F2536345300E626E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21E5E2536345300E626E7 /* AppDelegate.swift */; };
 		87D21E612536345300E626E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21E602536345300E626E7 /* SceneDelegate.swift */; };
 		87D21E682536345400E626E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87D21E672536345400E626E7 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		871EC8B425364BA3005CC42C /* ImageProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProfile.swift; sourceTree = "<group>"; };
 		871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVCHelper.swift; sourceTree = "<group>"; };
+		8735A1C5253DFA20003501AF /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		87B65794253DF868006D6770 /* InfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableView.swift; sourceTree = "<group>"; };
 		87D21E5B2536345300E626E7 /* ApproachableGeekChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApproachableGeekChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D21E5E2536345300E626E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87D21E602536345300E626E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8735A1CA253DFA29003501AF /* InfoTableView */ = {
+			isa = PBXGroup;
+			children = (
+				87B65794253DF868006D6770 /* InfoTableView.swift */,
+				8735A1C5253DFA20003501AF /* InfoTableViewCell.swift */,
+			);
+			path = InfoTableView;
+			sourceTree = "<group>";
+		};
+		8735A1CB253DFA48003501AF /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				87D21E972536383200E626E7 /* ProfileVC.swift */,
+				871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */,
+				871EC8B425364BA3005CC42C /* ImageProfile.swift */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
 		87D21E522536345300E626E7 = {
 			isa = PBXGroup;
 			children = (
@@ -108,9 +131,8 @@
 				87D21E5E2536345300E626E7 /* AppDelegate.swift */,
 				87D21E602536345300E626E7 /* SceneDelegate.swift */,
 				87EBFDA9253BBA7E004F0782 /* ProfileNavController.swift */,
-				87D21E972536383200E626E7 /* ProfileVC.swift */,
-				871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */,
-				871EC8B425364BA3005CC42C /* ImageProfile.swift */,
+				8735A1CB253DFA48003501AF /* ProfileVC */,
+				8735A1CA253DFA29003501AF /* InfoTableView */,
 				87D21EA7253648C800E626E7 /* DataModel */,
 				87D21E672536345400E626E7 /* Assets.xcassets */,
 				87D21E692536345400E626E7 /* LaunchScreen.storyboard */,
@@ -277,8 +299,10 @@
 				87D21EA3253648C100E626E7 /* User.swift in Sources */,
 				87D21E982536383200E626E7 /* ProfileVC.swift in Sources */,
 				87D21E5F2536345300E626E7 /* AppDelegate.swift in Sources */,
+				8735A1C6253DFA20003501AF /* InfoTableViewCell.swift in Sources */,
 				871EC8B525364BA3005CC42C /* ImageProfile.swift in Sources */,
 				871EC8C32538F89B005CC42C /* ProfileVCHelper.swift in Sources */,
+				87B65795253DF868006D6770 /* InfoTableView.swift in Sources */,
 				87EBFDAA253BBA7E004F0782 /* ProfileNavController.swift in Sources */,
 				87D21E612536345300E626E7 /* SceneDelegate.swift in Sources */,
 			);

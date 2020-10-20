@@ -8,11 +8,11 @@
 import UIKit
 import PhotosUI
 
-class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerControllerDelegate, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
+class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerControllerDelegate, PHPickerViewControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
     private var user : User?
     internal var imageProfile : ImageProfile
-    internal var profileInfo : InfoTableView?
+    internal var infoTableView : InfoTableView
     private lazy var imagePickerController = UIImagePickerController()
     private var pHPickerConfiguration : PHPickerConfiguration {
         var configuration = PHPickerConfiguration()
@@ -22,9 +22,10 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
 
     init() {
         self.imageProfile = ImageProfile(frame: CGRect.zero, imageName: nil)
-        
+        self.infoTableView = InfoTableView(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
         self.imageProfile.imageDelegate = self
+        self.infoTableView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +34,7 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         
     override func loadView() {
         super.loadView()
-        self.setUp()
+        self.viewsSetUp()
     }
     internal func editProfileImageButtonTapped() {
         self.present(self.editProfileImageAlert(takeNewFunction: self.takeNewImage,
@@ -62,7 +63,7 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true) {
             if !results.isEmpty {
-                results[0].itemProvider.loadObject(ofClass: UIImage.self) { (imageObj, errir) in
+                results[0].itemProvider.loadObject(ofClass: UIImage.self) { (imageObj, error) in
                     if let image = imageObj as? UIImage {
                         DispatchQueue.main.async {
                             self.imageProfile.updateImageProfile(newImage: image)
@@ -82,6 +83,18 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
                 return
             }
             self.imageProfile.updateImageProfile(newImage: imagedPicked)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 {
+            return 150
+        } else {
+            return 70
         }
     }
 }

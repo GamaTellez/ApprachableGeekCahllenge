@@ -34,13 +34,14 @@ extension ProfileVC {
         return imageSourceAlert
     }
     
-    internal func savedPhotoTakenToLibraryAlert(imageToSave: UIImage) {
-        let savePhotoAlert = UIAlertController(title: "New Photo Taken", message: "Would you like to save the new photo to your library?", preferredStyle: .alert)
-        savePhotoAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            
-        }))
-        savePhotoAlert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-            UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
-        }))
+    internal func setUp() {
+        self.title = "Edit Profile"
+        self.view.backgroundColor = UIColor.white
+        self.imageProfile.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.imageProfile)
+        NSLayoutConstraint.activate([self.imageProfile.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
+                                     self.imageProfile.heightAnchor.constraint(equalToConstant: self.imageProfile.width),
+                                     self.imageProfile.widthAnchor.constraint(equalToConstant: self.imageProfile.width),
+                                     self.imageProfile.centerXAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.centerXAnchor)])
     }
 }

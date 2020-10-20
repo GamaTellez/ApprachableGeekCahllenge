@@ -11,7 +11,8 @@ import PhotosUI
 class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerControllerDelegate, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
     
     private var user : User?
-    private var imageProfile : ImageProfile
+    internal var imageProfile : ImageProfile
+    internal var profileInfo : InfoTableView?
     private lazy var imagePickerController = UIImagePickerController()
     private var pHPickerConfiguration : PHPickerConfiguration {
         var configuration = PHPickerConfiguration()
@@ -21,6 +22,7 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
 
     init() {
         self.imageProfile = ImageProfile(frame: CGRect.zero, imageName: nil)
+        
         super.init(nibName: nil, bundle: nil)
         self.imageProfile.imageDelegate = self
     }
@@ -28,13 +30,11 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.viewSetUP()
+        
+    override func loadView() {
+        super.loadView()
+        self.setUp()
     }
-    
-    
     internal func editProfileImageButtonTapped() {
         self.present(self.editProfileImageAlert(takeNewFunction: self.takeNewImage,
                                                 selectFromLibraryFunction: self.selectImageFromLibrary),
@@ -67,12 +67,13 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
                         DispatchQueue.main.async {
                             self.imageProfile.updateImageProfile(newImage: image)
                         }
+                    } else {
+                        print("Failed to get image from library")
                     }
                 }
             }
         }
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
@@ -81,20 +82,7 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
                 return
             }
             self.imageProfile.updateImageProfile(newImage: imagedPicked)
-            if (picker.sourceType == .camera) {
-                self.savedPhotoTakenToLibraryAlert(imageToSave: imagedPicked)
-            }
         }
-    }
-    
-    private func viewSetUP() {
-        self.view.backgroundColor = UIColor.white
-        self.imageProfile.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.imageProfile)
-        NSLayoutConstraint.activate([self.imageProfile.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
-                                     self.imageProfile.heightAnchor.constraint(equalToConstant: self.imageProfile.width),
-                                     self.imageProfile.widthAnchor.constraint(equalToConstant: self.imageProfile.width),
-                                     self.imageProfile.centerXAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.centerXAnchor)])
     }
 }
 

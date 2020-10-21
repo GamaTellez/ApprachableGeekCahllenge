@@ -7,11 +7,55 @@
 
 import UIKit
 
-class FormVC: UIViewController {
-    var form : FormView
+class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     var user : User
+
+    internal var infoType : ProfileInfo
+    private var inputOne : String?
+    private var inputTwo : String?
+        
+    
+    internal lazy var inputTextFieldOne : UITextField = {
+        let textField = UITextField(frame: CGRect.zero)
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .done
+        return textField
+    }()
+    
+    internal lazy var inputTextFieldTwo : UITextField = {
+        let textField = UITextField(frame: CGRect.zero)
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .done
+        return textField
+    }()
+    
+    internal lazy var aboutYouTextView : UITextView = {
+        let textView = UITextView(frame: CGRect.zero)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 5
+        return textView
+    }()
+    
+    internal lazy var validationLabel :  ValidationLabel = {
+        let label = ValidationLabel(frame: CGRect.zero)
+        return label
+    }()
+    
+    internal var saveButton : UIButton = {
+        let button = UIButton(frame: CGRect.zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Save", for: .normal)
+        button.backgroundColor = UIColor.blue
+        return button
+    }()
+    
     init(user:User, infoToEdit: ProfileInfo) {
-        self.form = FormView(frame: CGRect.zero, infoType: infoToEdit)
+        //self.form = FormView(frame: CGRect.zero, infoType: infoToEdit)
+        self.infoType = infoToEdit
         self.user = user
         super.init(nibName: nil, bundle: nil)
         self.view.backgroundColor = .white
@@ -24,11 +68,38 @@ class FormVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.form.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.form)
-        NSLayoutConstraint.activate([self.form.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-                                     self.form.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-                                     self.form.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-                                     self.form.heightAnchor.constraint(equalToConstant: 400)])
+        self.setUpViews()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.validationLabel.clear()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.saveInfoButtonTapped()
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.validationLabel.clear()
+    }
+    
+    @objc func saveInfoButtonTapped() {
+        if self.infoType == .name {
+            self.inputOne = self.inputTextFieldOne.text
+            self.inputTwo = self.inputTextFieldTwo.text
+        }
+        
+        if self.infoType == .about {
+            self.inputOne = self.aboutYouTextView.text
+        }
+        
+        if self.infoType == .phone || self.infoType == .email {
+            self.inputOne = self.inputTextFieldOne.text
+        }
+        if  self.validationLabel.validateInput(inputOne: self.inputOne, inputTwo: self.inputTwo, for: self.infoType) {
+            
+        }
     }
 }

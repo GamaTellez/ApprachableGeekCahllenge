@@ -13,15 +13,14 @@ import UIKit
 class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
 
     private var infoType : ProfileInfo
-    private var name : String?
-    private var number : String?
-    private var aboutYou : String?
-    private var email : String?
+    private var inputOne : String?
+    private var inputTwo : String?
     
     private lazy var inputTextFieldOne : UITextField = {
         let textField = UITextField(frame: CGRect.zero)
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -29,6 +28,7 @@ class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
         let textField = UITextField(frame: CGRect.zero)
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -41,12 +41,8 @@ class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
         return textView
     }()
     
-    private lazy var validationLabel : UILabel = {
-        let label = UILabel(frame: CGRect.zero)
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.black.cgColor
-        label.layer.cornerRadius = 5
-        label.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var validationLabel :  ValidationLabel = {
+        let label = ValidationLabel(frame: CGRect.zero)
         return label
     }()
     
@@ -64,8 +60,8 @@ class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
         
         
         if self.infoType == .email || self.infoType == .phone {
-            self.inputTextFieldOne.keyboardType = self.infoType == ProfileInfo.email ? UIKeyboardType.emailAddress : UIKeyboardType.namePhonePad
-            self.inputTextFieldOne.placeholder = self.infoType == ProfileInfo.email ? "Email" : "Phone"
+            self.inputTextFieldOne.keyboardType = self.infoType == ProfileInfo.email ? UIKeyboardType.emailAddress : UIKeyboardType.phonePad
+            self.inputTextFieldOne.placeholder = self.infoType == ProfileInfo.email ? "Email" : "Phone (just numbers)."
             self.inputTextFieldOne.delegate = self
             self.addSubview(self.inputTextFieldOne)
             self.layoutNextView(view: self.inputTextFieldOne, below: self.safeAreaLayoutGuide.topAnchor, centerXAnchor: self.safeAreaLayoutGuide.centerXAnchor)
@@ -98,11 +94,11 @@ class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
         
         self.addSubview(self.saveButton)
         self.layoutNextView(view: self.saveButton, below: self.validationLabel.bottomAnchor, centerXAnchor: self.safeAreaLayoutGuide.centerXAnchor)
-        self.saveButton.addTarget(self, action: #selector(self.saveInfo), for: .touchUpInside)
+        self.saveButton.addTarget(self, action: #selector(self.saveInfoButtonTapped), for: .touchUpInside)
     }
     
     private func layoutNextView(view: UIView, below yAxisAnchor:NSLayoutYAxisAnchor, centerXAnchor:NSLayoutXAxisAnchor) {
-        let height : CGFloat = view == self.aboutYouTextView ? 200 : 30
+        let height : CGFloat = view == self.aboutYouTextView ? 200 : 50
         NSLayoutConstraint.activate([view.topAnchor.constraint(equalTo: yAxisAnchor, constant: 10),
                                      view.widthAnchor.constraint(equalToConstant: 300),
                                      view.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -113,23 +109,35 @@ class FormView: UIView, UITextFieldDelegate, UITextViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func saveInfo() {
-        
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.validationLabel.clear()
+        return true
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.saveInfoButtonTapped()
+        return true
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        switch self.infoType {
-        case .name:
+        self.validationLabel.clear()
+    }
+    
+    @objc func saveInfoButtonTapped() {
+        if self.infoType == .name {
+            self.inputOne = self.inputTextFieldOne.text
+            self.inputTwo = self.inputTextFieldTwo.text
+        }
+        
+        if self.infoType == .about {
+            self.inputOne = self.aboutYouTextView.text
+        }
+        
+        if self.infoType == .phone || self.infoType == .email {
+            self.inputOne = self.inputTextFieldOne.text
+        }
+        if  self.validationLabel.validateInput(inputOne: self.inputOne, inputTwo: self.inputTwo, for: self.infoType) {
             
-        case .phone:
-            
-        case .email:
-            
-        case .about:
         }
     }
 }

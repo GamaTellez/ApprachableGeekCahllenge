@@ -87,7 +87,16 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
+        var infoToEdit : ProfileInfo = .name
+        switch indexPath.row {
+        case 0: infoToEdit = .name
+        case 1: infoToEdit = .phone
+        case 2: infoToEdit = .email
+        case 3: infoToEdit = .about
+        default:infoToEdit = .name
+        }
+        self.navigationController?.pushViewController(FormVC(user: User(name: nil, phone: nil, email: nil, intro: nil, profileImage: nil), infoToEdit: infoToEdit), animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

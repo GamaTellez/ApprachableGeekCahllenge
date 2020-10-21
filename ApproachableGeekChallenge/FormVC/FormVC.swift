@@ -29,6 +29,6 @@ class FormVC: UIViewController {
         NSLayoutConstraint.activate([self.form.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
                                      self.form.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
                                      self.form.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-                                     self.form.heightAnchor.constraint(equalToConstant: 200)])
+                                     self.form.heightAnchor.constraint(equalToConstant: 400)])
     }
 }

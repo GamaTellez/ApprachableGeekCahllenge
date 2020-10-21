@@ -19,6 +19,7 @@ class ProfileNavController : UINavigationController {
     }
     
     private func setUp() {
-        self.navigationBar.barTintColor = UIColor.blue
+        //self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 }

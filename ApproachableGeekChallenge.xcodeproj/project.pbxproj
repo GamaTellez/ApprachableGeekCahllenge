@@ -10,6 +10,7 @@
 		871EC8B525364BA3005CC42C /* ImageProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871EC8B425364BA3005CC42C /* ImageProfile.swift */; };
 		871EC8C32538F89B005CC42C /* ProfileVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */; };
 		8735A1C6253DFA20003501AF /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8735A1C5253DFA20003501AF /* InfoTableViewCell.swift */; };
+		879A65FB2540CDC100EF8EC4 /* ValidationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879A65FA2540CDC100EF8EC4 /* ValidationLabel.swift */; };
 		87B65795253DF868006D6770 /* InfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B65794253DF868006D6770 /* InfoTableView.swift */; };
 		87D21E5F2536345300E626E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21E5E2536345300E626E7 /* AppDelegate.swift */; };
 		87D21E612536345300E626E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21E602536345300E626E7 /* SceneDelegate.swift */; };
@@ -20,6 +21,8 @@
 		87D21E982536383200E626E7 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21E972536383200E626E7 /* ProfileVC.swift */; };
 		87D21EA3253648C100E626E7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D21EA2253648C100E626E7 /* User.swift */; };
 		87EBFDAA253BBA7E004F0782 /* ProfileNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBFDA9253BBA7E004F0782 /* ProfileNavController.swift */; };
+		87EF0AD9253FA24600099D30 /* FormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF0AD8253FA24600099D30 /* FormVC.swift */; };
+		87EF0AE6253FA7A100099D30 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF0AE5253FA7A100099D30 /* FormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,7 @@
 		871EC8B425364BA3005CC42C /* ImageProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProfile.swift; sourceTree = "<group>"; };
 		871EC8C22538F89B005CC42C /* ProfileVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVCHelper.swift; sourceTree = "<group>"; };
 		8735A1C5253DFA20003501AF /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		879A65FA2540CDC100EF8EC4 /* ValidationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLabel.swift; sourceTree = "<group>"; };
 		87B65794253DF868006D6770 /* InfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableView.swift; sourceTree = "<group>"; };
 		87D21E5B2536345300E626E7 /* ApproachableGeekChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApproachableGeekChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D21E5E2536345300E626E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		87D21E972536383200E626E7 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		87D21EA2253648C100E626E7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		87EBFDA9253BBA7E004F0782 /* ProfileNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavController.swift; sourceTree = "<group>"; };
+		87EF0AD8253FA24600099D30 /* FormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVC.swift; sourceTree = "<group>"; };
+		87EF0AE5253FA7A100099D30 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,16 @@
 			path = ProfileVC;
 			sourceTree = "<group>";
 		};
+		879A65FF2540CDD200EF8EC4 /* FormVC */ = {
+			isa = PBXGroup;
+			children = (
+				87EF0AD8253FA24600099D30 /* FormVC.swift */,
+				87EF0AE5253FA7A100099D30 /* FormView.swift */,
+				879A65FA2540CDC100EF8EC4 /* ValidationLabel.swift */,
+			);
+			path = FormVC;
+			sourceTree = "<group>";
+		};
 		87D21E522536345300E626E7 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +149,7 @@
 				87EBFDA9253BBA7E004F0782 /* ProfileNavController.swift */,
 				8735A1CB253DFA48003501AF /* ProfileVC */,
 				8735A1CA253DFA29003501AF /* InfoTableView */,
+				879A65FF2540CDD200EF8EC4 /* FormVC */,
 				87D21EA7253648C800E626E7 /* DataModel */,
 				87D21E672536345400E626E7 /* Assets.xcassets */,
 				87D21E692536345400E626E7 /* LaunchScreen.storyboard */,
@@ -296,8 +313,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87EF0AD9253FA24600099D30 /* FormVC.swift in Sources */,
 				87D21EA3253648C100E626E7 /* User.swift in Sources */,
 				87D21E982536383200E626E7 /* ProfileVC.swift in Sources */,
+				879A65FB2540CDC100EF8EC4 /* ValidationLabel.swift in Sources */,
 				87D21E5F2536345300E626E7 /* AppDelegate.swift in Sources */,
 				8735A1C6253DFA20003501AF /* InfoTableViewCell.swift in Sources */,
 				871EC8B525364BA3005CC42C /* ImageProfile.swift in Sources */,
@@ -305,6 +324,7 @@
 				87B65795253DF868006D6770 /* InfoTableView.swift in Sources */,
 				87EBFDAA253BBA7E004F0782 /* ProfileNavController.swift in Sources */,
 				87D21E612536345300E626E7 /* SceneDelegate.swift in Sources */,
+				87EF0AE6253FA7A100099D30 /* FormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,7 +502,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gamateTellez.ApproachableGeekChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -501,7 +521,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gamateTellez.ApproachableGeekChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

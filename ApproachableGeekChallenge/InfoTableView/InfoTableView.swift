@@ -26,6 +26,7 @@ class InfoTableView: UITableView, UITableViewDataSource {
         self.user = user
         super.init(frame: frame, style: .plain)
         self.dataSource = self
+        self.tableFooterView = UIView()
         self.register(InfoTableViewCell.self, forCellReuseIdentifier: InfoTableViewCell.infoCellIdentifier)
     }
     

@@ -20,8 +20,10 @@ enum ProfileInfo : CaseIterable {
 }
 
 class InfoTableView: UITableView, UITableViewDataSource {
-
-    init(frame: CGRect) {
+    private var user : User
+    
+    init(frame: CGRect, user: User) {
+        self.user = user
         super.init(frame: frame, style: .plain)
         self.dataSource = self
         self.register(InfoTableViewCell.self, forCellReuseIdentifier: InfoTableViewCell.infoCellIdentifier)
@@ -39,17 +41,16 @@ class InfoTableView: UITableView, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.infoCellIdentifier, for: indexPath) as! InfoTableViewCell
         switch indexPath.row {
         case 0:
-            cell.updateInfoType(infoType: .name)
+            cell.updateInfoType(info: .name, for: self.user)
         case 1:
-            cell.updateInfoType(infoType: .phone)
+            cell.updateInfoType(info: .phone, for: self.user)
         case 2:
-            cell.updateInfoType(infoType: .email)
+            cell.updateInfoType(info: .email, for: self.user)
         case 3:
-            cell.updateInfoType(infoType: .about)
+            cell.updateInfoType(info: .about, for: self.user)
         default:
             break
         }
-        
         return cell
     }
 }

@@ -10,7 +10,7 @@ import PhotosUI
 
 class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerControllerDelegate, PHPickerViewControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
-    private var user : User?
+    private var user : User
     internal var imageProfile : ImageProfile
     internal var infoTableView : InfoTableView
     private lazy var imagePickerController = UIImagePickerController()
@@ -22,8 +22,10 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
 
     init() {
         self.imageProfile = ImageProfile(frame: CGRect.zero, imageName: nil)
-        self.infoTableView = InfoTableView(frame: CGRect.zero)
+        self.user = User(name: nil, phone: nil, email: nil, intro: nil, profileImage: nil)
+        self.infoTableView = InfoTableView(frame: CGRect.zero, user: self.user)
         super.init(nibName: nil, bundle: nil)
+        self.title = "My Profile"
         self.imageProfile.imageDelegate = self
         self.infoTableView.delegate = self
     }
@@ -35,6 +37,12 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     override func loadView() {
         super.loadView()
         self.viewsSetUp()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let selectedRowPath = self.infoTableView.indexPathForSelectedRow else { return }
+        self.infoTableView.reloadRows(at: [selectedRowPath], with: .fade)
     }
     internal func editProfileImageButtonTapped() {
         self.present(self.editProfileImageAlert(takeNewFunction: self.takeNewImage,
@@ -54,6 +62,8 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         }
     }
     
+    
+    //Mark: Profile Image
     private func selectImageFromLibrary() {
         let imagePicker = PHPickerViewController(configuration: self.pHPickerConfiguration)
         imagePicker.delegate = self
@@ -86,8 +96,10 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         }
     }
     
+    //MARK: info table view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
+        
         var infoToEdit : ProfileInfo = .name
         switch indexPath.row {
         case 0: infoToEdit = .name
@@ -96,15 +108,11 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         case 3: infoToEdit = .about
         default:infoToEdit = .name
         }
-        self.navigationController?.pushViewController(FormVC(user: User(name: nil, phone: nil, email: nil, intro: nil, profileImage: nil), infoToEdit: infoToEdit), animated: true)
+        self.navigationController?.pushViewController(FormVC(user: self.user, infoToEdit: infoToEdit), animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 {
-            return 150
-        } else {
-            return 70
-        }
+        return 70
     }
 }
 

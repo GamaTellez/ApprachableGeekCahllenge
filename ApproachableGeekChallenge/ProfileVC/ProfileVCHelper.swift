@@ -47,7 +47,7 @@ extension ProfileVC {
         self.infoTableView.translatesAutoresizingMaskIntoConstraints = false
         self.infoTableView.isScrollEnabled = false
         self.view.addSubview(self.infoTableView)
-        NSLayoutConstraint.activate([self.infoTableView.topAnchor.constraint(equalTo: self.imageProfile.safeAreaLayoutGuide.bottomAnchor, constant: 10),
+        NSLayoutConstraint.activate([self.infoTableView.topAnchor.constraint(equalTo: self.imageProfile.safeAreaLayoutGuide.bottomAnchor, constant: 40),
                                      self.infoTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
                                      self.infoTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
                                      self.infoTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)])

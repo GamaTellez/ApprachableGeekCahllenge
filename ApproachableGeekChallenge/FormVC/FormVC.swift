@@ -45,16 +45,16 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         return label
     }()
     
-    internal var saveButton : UIButton = {
-        let button = UIButton(frame: CGRect.zero)
+    internal var saveButton : ActivityButton = {
+        let button = ActivityButton(frame: CGRect.zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save", for: .normal)
         button.backgroundColor = UIColor.blue
+        button.layer.cornerRadius = 5
         return button
     }()
     
     init(user:User, infoToEdit: ProfileInfo) {
-        //self.form = FormView(frame: CGRect.zero, infoType: infoToEdit)
         self.infoType = infoToEdit
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -70,6 +70,7 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         super.loadView()
         self.setUpViews()
     }
+        
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.validationLabel.clear()
@@ -98,8 +99,14 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         if self.infoType == .phone || self.infoType == .email {
             self.inputOne = self.inputTextFieldOne.text
         }
-        if  self.validationLabel.validateInput(inputOne: self.inputOne, inputTwo: self.inputTwo, for: self.infoType) {
-            
+        
+        if  self.validationLabel.isInputValidated(inputOne: self.inputOne, inputTwo: self.inputTwo, for: self.infoType) {
+            self.resignFirstResponder()
+            self.saveButton.showActivity()
+            self.saveButton.removeActivity {
+                self.user.updateInfo(infoType: self.infoType, inputOne: self.inputOne, inputTwo: self.inputTwo)
+                    self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

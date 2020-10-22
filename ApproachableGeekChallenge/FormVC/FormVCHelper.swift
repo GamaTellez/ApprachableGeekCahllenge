@@ -50,7 +50,20 @@ extension FormVC {
         
     }
     private func layoutNextView(view: UIView, below yAxisAnchor:NSLayoutYAxisAnchor, centerXAnchor:NSLayoutXAxisAnchor) {
-        let height : CGFloat = view == self.aboutYouTextView ? 200 : 50
+        var height:CGFloat = 0
+        if view == self.inputTextFieldOne || view == self.inputTextFieldTwo {
+            height = 40
+        }
+        if view == self.validationLabel {
+            height = 50
+        }
+        if view == self.aboutYouTextView {
+            height = 200
+        }
+        if view == self.saveButton {
+            height = 50
+        }
+    
         NSLayoutConstraint.activate([view.topAnchor.constraint(equalTo: yAxisAnchor, constant: 10),
                                      view.widthAnchor.constraint(equalToConstant: 300),
                                      view.centerXAnchor.constraint(equalTo: centerXAnchor),

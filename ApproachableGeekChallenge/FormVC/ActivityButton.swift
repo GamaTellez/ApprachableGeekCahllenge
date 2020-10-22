@@ -8,13 +8,35 @@
 import UIKit
 
 class ActivityButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    private lazy var activityView : UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView(style: .medium)
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        activityView.color = .white
+        return activityView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    internal func showActivity() {
+        self.setTitle("Saving...", for: .normal)
+        self.addSubview(self.activityView)
+        NSLayoutConstraint.activate([self.activityView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
+                                     self.activityView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10)])
+        self.activityView.startAnimating()
+    }
+    
+    internal func removeActivity(competion: @escaping ()-> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.activityView.stopAnimating()
+            self.activityView.removeFromSuperview()
+            competion()
+        }
+    }
 }

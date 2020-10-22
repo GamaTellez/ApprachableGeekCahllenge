@@ -16,14 +16,6 @@ class User {
     private(set) var about : String?
     private(set) var profileImage : UIImage?
     
-    init(name: String?, phone: String?, email: String?, intro: String?, profileImage: UIImage?) {
-        self.firstName = name
-        self.phone = phone
-        self.email = email
-        self.about = intro
-        self.profileImage = profileImage
-    }
-    
     internal func updateInfo(infoType: ProfileInfo, inputOne: String?, inputTwo: String?) {
         switch infoType {
         case .name:

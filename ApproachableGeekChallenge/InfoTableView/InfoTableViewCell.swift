@@ -14,14 +14,17 @@ class InfoTableViewCell: UITableViewCell {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     private let infoLabel : UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -60,10 +63,10 @@ class InfoTableViewCell: UITableViewCell {
         self.titleLabel.text = info.infoType
         switch info {
         case .name:
-            self.infoLabel.text = "\(user.firstName ?? "Tap to edit.") \(user.lastName ?? "")"
-        case .phone: self.infoLabel.text = user.phone ?? "Tap to edit."
-        case .email: self.infoLabel.text = user.email ?? "Tap to edit."
-        case .about: self.infoLabel.text = user.about ?? "Tap to edit."
+            self.infoLabel.text = "\(user.firstName ?? "") \(user.lastName ?? "")"
+        case .phone: self.infoLabel.text = user.phone ?? ""
+        case .email: self.infoLabel.text = user.email ?? ""
+        case .about: self.infoLabel.text = user.about ?? ""
         }
     }
 }

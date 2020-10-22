@@ -10,7 +10,7 @@ import PhotosUI
 
 class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerControllerDelegate, PHPickerViewControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
-    private var user : User
+    private var user = User()
     internal var imageProfile : ImageProfile
     internal var infoTableView : InfoTableView
     private lazy var imagePickerController = UIImagePickerController()
@@ -22,7 +22,6 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
 
     init() {
         self.imageProfile = ImageProfile(frame: CGRect.zero, imageName: nil)
-        self.user = User(name: nil, phone: nil, email: nil, intro: nil, profileImage: nil)
         self.infoTableView = InfoTableView(frame: CGRect.zero, user: self.user)
         super.init(nibName: nil, bundle: nil)
         self.title = "My Profile"
@@ -109,10 +108,16 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         default:infoToEdit = .name
         }
         self.navigationController?.pushViewController(FormVC(user: self.user, infoToEdit: infoToEdit), animated: true)
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        if indexPath.row == 3 && self.user.about != nil {
+            return 130
+        } else {
+            return 70
+        }
     }
 }
 

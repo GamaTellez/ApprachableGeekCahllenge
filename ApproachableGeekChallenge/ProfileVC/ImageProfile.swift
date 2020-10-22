@@ -14,7 +14,7 @@ protocol ImageProfileDelegate {
 
 class ImageProfile : UIView {
     private var imageName : String?
-    internal var width : CGFloat = 250
+    internal var width : CGFloat = 200
     private var editImageButton : UIButton?
     internal var imageDelegate : ImageProfileDelegate?
     private  var profileImageView = UIImageView()

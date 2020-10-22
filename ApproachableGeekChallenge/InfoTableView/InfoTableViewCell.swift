@@ -14,13 +14,14 @@ class InfoTableViewCell: UITableViewCell {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
     
     private let infoLabel : UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -34,6 +35,7 @@ class InfoTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([self.titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5),
                                      self.titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
@@ -42,7 +44,7 @@ class InfoTableViewCell: UITableViewCell {
         self.addSubview(self.infoLabel)
         NSLayoutConstraint.activate([self.infoLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 10),
                                      self.infoLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-                                     self.infoLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+                                     self.infoLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -50),
                                      self.infoLabel.bottomAnchor.constraint(greaterThanOrEqualTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5)])
         
         self.addSubview(self.disclosureImage)
@@ -54,7 +56,14 @@ class InfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal func updateInfoType(infoType: ProfileInfo) {
-        self.titleLabel.text = infoType.infoType
+    internal func updateInfoType(info: ProfileInfo, for user: User) {
+        self.titleLabel.text = info.infoType
+        switch info {
+        case .name:
+            self.infoLabel.text = "\(user.firstName ?? "Tap to edit.") \(user.lastName ?? "")"
+        case .phone: self.infoLabel.text = user.phone ?? "Tap to edit."
+        case .email: self.infoLabel.text = user.email ?? "Tap to edit."
+        case .about: self.infoLabel.text = user.about ?? "Tap to edit."
+        }
     }
 }

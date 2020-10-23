@@ -21,7 +21,7 @@ class InfoTableViewCell: UITableViewCell {
     private let infoLabel : UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 16)
         label.adjustsFontSizeToFitWidth = true
@@ -60,7 +60,7 @@ class InfoTableViewCell: UITableViewCell {
     }
     
     internal func updateInfoType(info: ProfileInfo, for user: User) {
-        self.titleLabel.text = info.infoType
+        self.titleLabel.text = info.type
         switch info {
         case .name:
             self.infoLabel.text = "\(user.firstName ?? "") \(user.lastName ?? "")"

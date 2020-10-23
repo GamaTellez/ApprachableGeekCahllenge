@@ -14,7 +14,7 @@ protocol ImageProfileDelegate {
 
 class ImageProfile : UIView {
     private var imageName : String?
-    internal var width : CGFloat = 200
+    internal var width : CGFloat = 150
     private var editImageButton : UIButton?
     internal var imageDelegate : ImageProfileDelegate?
     private  var profileImageView = UIImageView()
@@ -60,7 +60,7 @@ class ImageProfile : UIView {
         self.addSubview(self.profileImageView)
         
         
-        let editImageButton = UIButton(frame: CGRect(x: self.width - 60, y: 20, width: 40, height: 40))
+        let editImageButton = UIButton(frame: CGRect(x: self.width - 30, y: 20, width: 30, height: 30))
         editImageButton.backgroundColor = UIColor.white
         editImageButton.tintColor = UIColor.blue
         editImageButton.layer.cornerRadius = editImageButton.frame.width / 2

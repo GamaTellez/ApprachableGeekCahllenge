@@ -9,7 +9,6 @@ import UIKit
 
 class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     var user : User
-
     internal var infoType : ProfileInfo
     private var inputOne : String?
     private var inputTwo : String?
@@ -17,7 +16,6 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     internal lazy var inputTextFieldOne : UITextField = {
         let textField = UITextField(frame: CGRect.zero)
-        textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .done
         return textField
@@ -25,7 +23,6 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     internal lazy var inputTextFieldTwo : UITextField = {
         let textField = UITextField(frame: CGRect.zero)
-        textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .done
         return textField
@@ -50,7 +47,6 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save", for: .normal)
         button.backgroundColor = UIColor.blue
-        button.layer.cornerRadius = 5
         return button
     }()
     
@@ -59,7 +55,7 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         self.user = user
         super.init(nibName: nil, bundle: nil)
         self.view.backgroundColor = .white
-        self.title = infoToEdit.infoType
+        self.title = infoToEdit.type
     }
     
     required init?(coder: NSCoder) {
@@ -74,11 +70,6 @@ class FormVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.validationLabel.clear()
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.saveInfoButtonTapped()
         return true
     }
     

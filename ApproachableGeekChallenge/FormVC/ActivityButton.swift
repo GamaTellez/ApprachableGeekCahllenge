@@ -25,8 +25,10 @@ class ActivityButton: UIButton {
     
     
     internal func showActivity() {
-        self.setTitle("Saving...", for: .normal)
-        self.addSubview(self.activityView)
+        UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.setTitle("Saving...", for: .normal)
+            self.addSubview(self.activityView)
+        }, completion: nil)
         NSLayoutConstraint.activate([self.activityView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
                                      self.activityView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10)])
         self.activityView.startAnimating()

@@ -61,7 +61,6 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         }
     }
     
-    
     //Mark: Profile Image
     private func selectImageFromLibrary() {
         let imagePicker = PHPickerViewController(configuration: self.pHPickerConfiguration)
@@ -75,6 +74,7 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
                 results[0].itemProvider.loadObject(ofClass: UIImage.self) { (imageObj, error) in
                     if let image = imageObj as? UIImage {
                         DispatchQueue.main.async {
+                            self.user.updateImage(image: image)
                             self.imageProfile.updateImageProfile(newImage: image)
                         }
                     } else {
@@ -97,8 +97,6 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     
     //MARK: info table view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //tableView.deselectRow(at: indexPath, animated: true)
-        
         var infoToEdit : ProfileInfo = .name
         switch indexPath.row {
         case 0: infoToEdit = .name
@@ -112,9 +110,9 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 3 && self.user.about != nil {
-            return 130
+            return 120
         } else {
-            return 70
+            return 60
         }
     }
 }

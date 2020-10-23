@@ -60,12 +60,23 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
             self.present(self.imagePickerControllerSorceAlert(), animated: true, completion: nil)
         }
     }
-    
-    //Mark: Profile Image
+
     private func selectImageFromLibrary() {
         let imagePicker = PHPickerViewController(configuration: self.pHPickerConfiguration)
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension ProfileVC {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            guard let imagedPicked = info[.originalImage] as? UIImage else {
+                print("Failed to get image taken")
+                return
+            }
+            self.imageProfile.updateImageProfile(newImage: imagedPicked)
+        }
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -84,18 +95,9 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
             }
         }
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
-            guard let imagedPicked = info[.originalImage] as? UIImage else {
-                print("Failed to get image taken")
-                return
-            }
-            self.imageProfile.updateImageProfile(newImage: imagedPicked)
-        }
-    }
-    
-    //MARK: info table view
+}
+
+extension ProfileVC {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var infoToEdit : ProfileInfo = .name
         switch indexPath.row {
@@ -116,5 +118,3 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         }
     }
 }
-
-

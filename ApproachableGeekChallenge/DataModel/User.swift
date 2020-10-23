@@ -21,9 +21,23 @@ class User {
         case .name:
             self.firstName = inputOne
             self.lastName = inputTwo
-        case .phone: self.phone = inputOne
+        case .phone: self.phone = inputOne?.toPhoneFormat()
         case .email: self.email = inputOne
         case .about: self.about = inputOne
         }
+    }
+
+    internal func updateImage(image: UIImage) {
+        self.profileImage = image
+    }
+}
+
+extension String {
+    public func toPhoneFormat() -> String {
+         return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
+    }
+    
+    public func toPlainNumber() -> String {
+        return self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 }

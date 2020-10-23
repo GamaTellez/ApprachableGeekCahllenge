@@ -108,8 +108,6 @@ class ProfileVC: UIViewController, ImageProfileDelegate, UIImagePickerController
         default:infoToEdit = .name
         }
         self.navigationController?.pushViewController(FormVC(user: self.user, infoToEdit: infoToEdit), animated: true)
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

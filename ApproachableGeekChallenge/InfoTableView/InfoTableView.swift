@@ -9,7 +9,7 @@ import UIKit
 
 enum ProfileInfo : CaseIterable {
     case name, phone,email,about
-    var infoType : String {
+    var type : String {
         switch self {
         case .name: return "Name"
         case .phone: return "Phone"
